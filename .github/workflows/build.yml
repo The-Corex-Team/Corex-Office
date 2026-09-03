@@ -56,7 +56,7 @@ jobs:
       - name: Configure build
         shell: wsl-bash {0}
         env:
-          WSLENV: ProgramFiles(x86)/p
+          WSLENV: ProgramFiles(x86)/p:GITHUB_WORKSPACE/p
         run: |
           cd $GITHUB_WORKSPACE
           ./autogen.sh --with-distro=CorexOfficeWin64
@@ -64,7 +64,7 @@ jobs:
       - name: Build (this is the multi-hour step)
         shell: wsl-bash {0}
         env:
-          WSLENV: ProgramFiles(x86)/p
+          WSLENV: ProgramFiles(x86)/p:GITHUB_WORKSPACE/p
         run: |
           cd $GITHUB_WORKSPACE
           make
