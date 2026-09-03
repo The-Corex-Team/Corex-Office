@@ -20,6 +20,7 @@ jobs:
       # but we make sure a distro is installed and set as default.
       - name: Set up WSL (Ubuntu)
         uses: Vampire/setup-wsl@v7
+        timeout-minutes: 15
         with:
           distribution: Ubuntu-22.04
 
@@ -54,12 +55,16 @@ jobs:
       # "WSL as helper" mode, per LibreOffice's documented Windows build path.
       - name: Configure build
         shell: wsl-bash {0}
+        env:
+          WSLENV: ProgramFiles(x86)/p
         run: |
           cd $GITHUB_WORKSPACE
           ./autogen.sh --with-distro=CorexOfficeWin64
 
       - name: Build (this is the multi-hour step)
         shell: wsl-bash {0}
+        env:
+          WSLENV: ProgramFiles(x86)/p
         run: |
           cd $GITHUB_WORKSPACE
           make
